@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="columns">
+    <div class="column is-one-quarter">
+    </div>
+    <div class="column is-half">
+        {% for item in object_list %}
+        <div class="box">
+            <article class="media">
+                <div class="media-left">
+                    <img src="{{ item.image.url }}" width="270" height="420">
+                </div>
+                <div class="content">
+                    <a href="">
+                        <strong></strong>
+                    </a>
+                    <p class="is-size-5">
+                        <a href="">
+                            <strong class="has-text-black">{{ item.title }}</strong>
+                        </a>
+                    </p>
+                    <div class="block">
+                        {{ item.created_at|date:"Y年m月d日 H:i" }}<br>
+                        {{ item.event_name }}<br>
+                        @{{ item.venue }}<br>
+                        種類：{{ item.event_choice }}<br>
+                        いいね：{{ item.good_count }}<br>
+                    </div>
+                </div>
+            </article>
+        </div>
+        {% endfor %}
+
+    </div>
+    <div class="column is-one-quarter">
+    </div>
+</div>
+
+{% endblock content %}
