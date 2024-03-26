@@ -1,39 +1,29 @@
 from django.shortcuts import render, redirect
-from django.views.generic import ListView, CreateView
+from django.views.generic import ListView, FormView
 from .models import Diary
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .forms import DiaryForm
+from django.urls import reverse_lazy
+from diary.forms import DiaryForm
+from django.views.generic.edit import FormView
+
 
 # Create your views here.
 class DiaryListView(ListView):
     model = Diary
     template_name = 'diary/list.html'
 
-class DiaryCreateView(LoginRequiredMixin, CreateView):
+    # get_querysetメソッドをオーバーライドして、順序を指定
+    def get_queryset(self):
+        # '-created_at'は作成日時の降順（最新のものが最初）を意味する
+        return Diary.objects.order_by('-created_at')
+
+class DiaryCreateView(LoginRequiredMixin, FormView):
     template_name = 'diary/diary_create.html'
+    form_class = DiaryForm
+    success_url = reverse_lazy('list')
 
-    def get(self, request):
-        diary_form = DiaryForm()
-        context = {
-            'post_form': diary_form,
-        }
-        return render(request, 'diary/diary_create.html', context)
-
-    def post(self, request, *args, **kwargs):
-        """ 
-        Postリクエスト時の処理
-        """
-        diary_form = DiaryForm(request.POST, prefix='post')
-        if diary_form.is_valid():
-            # postモデルのオブジェクトを作成
-            # commit=Falseでまだデータベースには保存されない
-            new_post = diary_form.save(commit=False)
-            new_post.author = request.user
-            #new_post.good_count = request.
-            new_post.save()
-            return redirect('diary:list')
-        context = {
-            'diary_form': diary_form,
-        }
-        return render(request, 'diary/diary_create.html', context)
-    
+    def form_valid(self, form):
+        diary_instance = form.save(commit=False)
+        diary_instance.author = self.request.user
+        diary_instance.save()
+        return super().form_valid(form)
