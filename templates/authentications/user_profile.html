@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="columns is-centered">
+    <div class="column is-half">
+        <h3 class="is-size-3">{{ user }}さんの投稿一覧</h3>
+        <br>
+        {% for diary in diarys %}
+        <div class="box">
+            <article class="media">
+                <div class="media-left">
+                    <img src="{{ diary.image.url }}" width="270" height="420">
+                </div>
+                <div class="content">
+                    <p class="is-size-5">
+                        <a href="{% url 'diary:detail' diary.pk %}">
+                            <strong>{{ diary.title }}</strong>
+                        </a>
+                    </p>
+                    <div class="block">
+                        {% comment %} 投稿内容が75文字以上だったらそれ以降は表示しない {% endcomment %}
+                        {{ diary.content|truncatechars:75 }}
+                    </div>
+                </div>
+            </article>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock content %}
