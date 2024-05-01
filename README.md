@@ -24,3 +24,5 @@ Burma
 <img width="1710" alt="スクリーンショット 2024-05-01 18 17 03" src="https://github.com/niwatorinoko/Otakker/assets/128505477/49f2e4c2-a6c3-48a9-97ac-45a6f1cfd4da">
 ログイン
 <img width="1709" alt="スクリーンショット 2024-05-01 18 16 13" src="https://github.com/niwatorinoko/Otakker/assets/128505477/dfb711d2-c8f8-4988-8383-c2bfcc893ce5">
+投稿詳細画面
+<img width="1710" alt="スクリーンショット 2024-05-01 18 27 32" src="https://github.com/niwatorinoko/Otakker/assets/128505477/8e437c67-e52c-49d4-b54c-84160b131e5e">
