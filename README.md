@@ -12,6 +12,6 @@
 Django  
 Postgres  
 Docker
-Burma  
+Burma 
 
-![list](media/list.png)
+<img width="1710" alt="list" src="https://github.com/niwatorinoko/Otakker/assets/128505477/b1216931-3b7a-40b1-a894-80c08114516e">
